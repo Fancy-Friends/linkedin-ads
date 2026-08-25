@@ -1,0 +1,80 @@
+{
+  "$comment": "THE hand-written part. Four packages -- ui, js, php, py -- are generated from this directory and are never edited. LinkedIn publishes prose reference tables rather than a downloadable machine-readable Marketing API specification, so every value here is traced to LinkedIn's own versioned documentation.",
+
+  "connectorApi": 1,
+
+  "service": "linkedin_ads",
+  "title": "LinkedIn Ads",
+  "domain": "marketing",
+  "docs": "https://learn.microsoft.com/en-us/linkedin/marketing/integrations/ads/account-structure/create-and-manage-campaigns?view=li-lms-2026-07",
+
+  "auth": "oauth2",
+  "requires": ["accessToken"],
+  "$requiresComment": "Only the member access token is sent to the Marketing API. The client pair and refresh token belong to the host's OAuth lifecycle and must never accompany an ordinary campaign request.",
+
+  "authorize": {
+    "kind": "bearer",
+    "credential": "accessToken",
+    "$comment": "Advertising permissions are MEMBER permissions in LinkedIn's three-legged OAuth flow, not application permissions. The member must both grant r_ads and hold a role on the requested Ad Account; a valid app token alone cannot read a campaign."
+  },
+
+  "oauth": {
+    "flow": "authorization_code",
+    "authorizeUrl": "https://www.linkedin.com/oauth/v2/authorization",
+    "tokenUrl": "https://www.linkedin.com/oauth/v2/accessToken",
+    "scopes": ["r_ads"],
+    "accessTokenCredential": "accessToken",
+    "refreshTokenCredential": "refreshToken",
+    "refreshTokenRotates": false,
+    "$refreshTokenRotates": "LinkedIn's programmatic-refresh documentation says the refresh token keeps the original 365-day lifetime when reused, and its sample returns the same refresh_token while refresh_token_expires_in counts down. This is a considered reusable token, not an unknown rotation policy.",
+    "accessTokenTtlSeconds": 5184000,
+    "$scopeComment": "r_ads is the read-only member permission documented for retrieving campaigns. rw_ads would also work, but asking for write access for a read action would violate LinkedIn's instruction to request the least permission needed.",
+    "$comment": "LinkedIn's confidential-client authorization-code exchange requires client_id, client_secret, code and redirect_uri; it does NOT require PKCE. Programmatic refresh tokens are available to approved Marketing Developer Platform partners, live for a fixed 365-day window and are reusable rather than rotated: LinkedIn's refresh example returns the same refresh token with a smaller refresh_token_expires_in value."
+  },
+
+  "headers": {
+    "LinkedIn-Version": "202608",
+    "X-Restli-Protocol-Version": "2.0.0"
+  },
+  "$headersComment": "Both headers are required on Marketing API calls. LinkedIn-Version does not mean 'latest': 202608 is the August 2026 release documented as current, and an omitted version is not defaulted. X-Restli-Protocol-Version selects the 2.0.0 wire protocol used by every current /rest example.",
+
+  "sandbox": "separate-account",
+  "baseUrls": {
+    "live": "https://api.linkedin.com",
+    "sandbox": "https://api.linkedin.com"
+  },
+  "sandboxNote": "LinkedIn's test estate is one API-created test Ad Account per developer application. It uses the same host and member OAuth flow, but every child campaign and creative inherits the account's test flag, creatives are never served, and campaigns are not billed. The account cannot later be converted between test and production.",
+
+  "encoding": "json",
+
+  "credentialFields": [
+    {
+      "key": "clientId",
+      "label": "OAuth client ID",
+      "scope": "provider",
+      "secret": false,
+      "help": "From the LinkedIn Developer application's Auth tab; one value for the whole installation."
+    },
+    {
+      "key": "clientSecret",
+      "label": "OAuth client secret",
+      "scope": "provider",
+      "secret": true,
+      "help": "From the same application. Used by the host for code exchange and programmatic refresh, never sent to the Marketing API."
+    },
+    {
+      "key": "accessToken",
+      "label": "Member access token",
+      "scope": "account",
+      "secret": true,
+      "help": "Per connected LinkedIn member. It expires after 60 days and only reaches Ad Accounts where that member has a sufficient role."
+    },
+    {
+      "key": "refreshToken",
+      "label": "Programmatic refresh token",
+      "scope": "account",
+      "secret": true,
+      "help": "Per connected member, available to approved Marketing Developer Platform partners. It keeps its original one-year expiry when reused."
+    }
+  ]
+}

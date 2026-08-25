@@ -1,0 +1,57 @@
+{
+  "$comment": "GET /rest/adAccounts/{adAccountId}/adCampaigns/{campaignID}, read from LinkedIn's August 2026 Campaign Management reference. A read is the honest first action: creating a campaign is not one self-contained operation -- it needs an existing Ad Account, organization, targeting decision, budget and bidding strategy, and often a campaign group before it can produce anything useful.",
+  "operation": "campaign_get",
+  "kind": "campaign",
+  "title": "LinkedIn ad campaign",
+  "description": "Retrieve one LinkedIn advertising campaign.",
+  "summary": "retrieve a campaign",
+  "docs": "https://learn.microsoft.com/en-us/linkedin/marketing/integrations/ads/account-structure/create-and-manage-campaigns?view=li-lms-2026-07#get-a-campaign",
+  "sideEffects": "none",
+
+  "$idempotencyComment": "This is a read-only GET, so replay does not create or alter an ad. LinkedIn documents no idempotency key for campaign creation; that omission matters when a write action is added, but inventing a key here would imply a guarantee the API does not make.",
+
+  "request": {
+    "method": "GET",
+    "path": "/rest/adAccounts/{adAccountId}/adCampaigns/{campaignId}",
+    "$pathComment": "LinkedIn requires BOTH numeric ids in the path. The campaign id is not globally addressable through a shorter /adCampaigns/{id} route in the current account-scoped API."
+  },
+
+  "config": [
+    {
+      "type": "text",
+      "key": "adAccountId",
+      "label": "Ad Account ID",
+      "required": true,
+      "description": "The numeric Sponsored Account id from Campaign Manager; send digits only, without the urn:li:sponsoredAccount: prefix.",
+      "send": { "in": "path", "as": "adAccountId", "value": "string" }
+    },
+    {
+      "type": "text",
+      "key": "campaignId",
+      "label": "Campaign ID",
+      "required": true,
+      "description": "The numeric campaign id within that Ad Account; send digits only, without a sponsoredCampaign URN prefix.",
+      "send": { "in": "path", "as": "campaignId", "value": "string" }
+    }
+  ],
+
+  "outputShape": [
+    { "path": "data.id", "type": "number", "description": "LinkedIn's numeric campaign id." },
+    { "path": "data.account", "type": "string", "description": "The immutable sponsored-account URN that owns the campaign." },
+    { "path": "data.name", "type": "string", "description": "The campaign name." },
+    { "path": "data.status", "type": "string", "description": "The user-managed campaign status, such as ACTIVE, PAUSED or DRAFT." },
+    { "path": "data.type", "type": "string", "description": "The placement family, such as SPONSORED_UPDATES or TEXT_AD." },
+    { "path": "data.test", "type": "boolean", "description": "True when the campaign belongs to LinkedIn's separate test Ad Account estate." },
+    { "path": "data.dailyBudget.amount", "type": "string", "description": "The daily budget amount. LinkedIn returns money amounts as decimal strings, not JSON numbers." },
+    { "path": "data.dailyBudget.currencyCode", "type": "string", "description": "The ISO currency code for the daily budget." },
+    { "path": "data.runSchedule.start", "type": "number", "description": "Campaign start time as Unix epoch milliseconds." },
+    { "path": "data.runSchedule.end", "type": "number", "description": "Campaign end time as Unix epoch milliseconds, when one is set." }
+  ],
+  "$outputComment": "The GET response is the Campaign object directly at the body top level; the connector runtime exposes it under data. Money amounts remain strings because LinkedIn's schema and sample response use strings even though timestamps and ids are numbers.",
+
+  "contract": {
+    "$comment": "The path identifiers sent and Campaign fields read. LinkedIn publishes prose schema tables rather than a machine-readable specification, but declaring the contract keeps the action ready for drift projection if that changes.",
+    "sends": ["adAccountId", "campaignId"],
+    "reads": ["id", "account", "name", "status", "type", "test", "dailyBudget", "runSchedule"]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "$comment": "LinkedIn returns the Campaign directly, not inside an element or campaign wrapper. This reproduces the current official Get a Campaign example, including decimal money strings, epoch-millisecond times and the test-estate flag.",
+  "operation": "campaign_get",
+  "response": {
+    "account": { "$fake": "id", "prefix": "urn:li:sponsoredAccount:" },
+    "associatedEntity": "urn:li:organization:2414183",
+    "audienceExpansionEnabled": false,
+    "campaignGroup": "urn:li:sponsoredCampaignGroup:602277684",
+    "changeAuditStamps": {
+      "created": { "time": 1530119777000 },
+      "lastModified": { "time": 1530119777000 }
+    },
+    "costType": "CPC",
+    "connectedTelevisionOnly": false,
+    "creativeSelection": "OPTIMIZED",
+    "dailyBudget": {
+      "amount": "1800",
+      "currencyCode": "USD"
+    },
+    "id": { "$fake": "int", "min": 100000000, "max": 999999999 },
+    "locale": {
+      "country": "US",
+      "language": "en"
+    },
+    "name": "Campaign Sponsored update B",
+    "offsiteDeliveryEnabled": false,
+    "optimizationTargetType": "NONE",
+    "test": false,
+    "runSchedule": {
+      "end": 1893456000000,
+      "start": 1787590800000
+    },
+    "servingStatuses": ["ACCOUNT_SERVING_HOLD"],
+    "status": "ACTIVE",
+    "type": "SPONSORED_UPDATES",
+    "unitCost": {
+      "amount": "15",
+      "currencyCode": "USD"
+    },
+    "version": {
+      "versionTag": "1"
+    }
+  }
+}
