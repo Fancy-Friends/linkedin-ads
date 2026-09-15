@@ -30,6 +30,12 @@ it('campaign_get fakes the shape LinkedIn Ads publishes', function () {
 
     $faked = LinkedinAdsFaker::respond('campaign_get', ['config' => $config, 'fake' => $fake]);
 
+    // Through JSON and back, because a faked EMPTY object is a stdClass — the only
+    // PHP value that spells `{}` on the wire — and `toBe` compares objects by
+    // identity. This asserts the VALUES; the `{}`-versus-`[]` spelling is what
+    // weaver's cross-runtime parity suite asserts, byte for byte.
+    $faked = json_decode((string) json_encode($faked), true, 512, JSON_THROW_ON_ERROR);
+
     expect($faked)->toBe([
         'account' => 'urn:li:sponsoredAccount:_fake_d03d950f3114',
         'associatedEntity' => 'urn:li:organization:2414183',

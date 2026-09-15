@@ -48,7 +48,7 @@ final class LinkedinAdsFaker
     }
 
     /** @param array<string,mixed> $config */
-    private static function CampaignGet(array $config, mixed $fake): array
+    private static function CampaignGet(array $config, mixed $fake): array|\stdClass
     {
         return [
         'account' => $fake->id('urn:li:sponsoredAccount:'),
