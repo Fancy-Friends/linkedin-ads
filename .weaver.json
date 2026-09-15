@@ -48,7 +48,7 @@
     "packages/py/pyproject.toml": "81f79864b404a6d559796a387025819fa0aab6e9168885b0ccc18620ffe53c27",
     "packages/py/src/fancy_linkedin_ads/__init__.py": "ba74a8a9b3eab52f3f6c2f617f9e97664988a41c6819f028f7d72a6d9abbdca6",
     "packages/py/src/fancy_linkedin_ads/_fake.py": "9333cb7f7060ccdb1999ddf524944d99cd29d8a8825abd9701144da35ec23441",
-    "packages/py/src/fancy_linkedin_ads/_runtime.py": "496ed910fa8beaa9ecfe514b885217ba848a3a7f91d3694d07287dda6bf38526",
+    "packages/py/src/fancy_linkedin_ads/_runtime.py": "8114e7de8b40ad4ad45ae87efb71cb817988ff563305f22a3c29531fb5a22ab3",
     "packages/py/src/fancy_linkedin_ads/actions/__init__.py": "b0719025462a57a5a34a703987b59ae27e7d7316277469619d6bbc2a3a9365ec",
     "packages/py/src/fancy_linkedin_ads/actions/campaign_get.py": "8b8a49cfcebdaa9ae504ed0236b32d99bb582dac834728864046e863d2965889",
     "packages/py/src/fancy_linkedin_ads/faker.py": "d9bc5f22e7607c5c6b9b72a240c50b204be30b83242ebb701cdfc14a845f61e6",
