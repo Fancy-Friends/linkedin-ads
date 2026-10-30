@@ -5,10 +5,10 @@
   "connectorApi": 1,
   "files": {
     ".gitattributes": "3b81cb009a60ff7f0762f24c5d336a4afd0284f2716e54c4823da08d839f664c",
-    ".github/workflows/ci.yml": "6ba535a606e4cd2a59478dc7f868ea933ab6f99f911da5fb946267e3ab5048f1",
+    ".github/workflows/ci.yml": "9e878ebd6221968da6143d6e93926716b66bfb093799d7a8206f019b59bb14c6",
     ".github/workflows/codeql.yml": "1bea52cb03359ad3bbfd4e1fc7c88d3ce3d82fd84996b6d1cf7f103b6faf91f4",
-    ".github/workflows/publish.yml": "f90796d170ab319d95ce393f508e6dbc174be4ce59866cf3c4f5fffddde286fd",
-    ".github/workflows/verify-published.yml": "e298d03e755044047a270ca2a30d2313fa21471d4598c90d85e397852e3bb7b4",
+    ".github/workflows/publish.yml": "606957c7fe304c279e9b34b948a359b76b6d2f928e7ab34a2bd68a7af2bb501b",
+    ".github/workflows/verify-published.yml": "48ccdc054bf87bd2a6502a47a7cb00f2dcb85cb542622c4b0889d3e05558ff6a",
     ".gitignore": "47a7633c70c1d1e6b3c17a782a105355accfb3495d6402f7f308256bf505e1ad",
     "AGENTS.md": "e661c0a2f0fbf7154319435d0006a16af00ffde47aaadd67adffbf98a50a9542",
     "CHANGELOG.md": "c050bbbd66eaa1045aa729ed8b740f64d7b7a03985692332353b72bd902c73b0",
