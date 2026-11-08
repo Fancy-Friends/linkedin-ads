@@ -4,6 +4,22 @@ All notable changes to `@particle-academy/linkedin-ads-ui`,
 `@particle-academy/linkedin-ads-js`, `particle-academy/linkedin-ads-php` and
 `fancy-linkedin-ads`.
 
+## [0.2.1] — 2026-11-08
+
+### Fixed
+
+- **The Laravel config's environment variable names now split camelCase**,
+  as documented. **Consumer action: none.** The old unsplit names are still
+  read as a fallback, so an app that set them keeps working; the new names
+  are preferred.
+
+  | Preferred | Still read |
+  |---|---|
+  | `LINKEDIN_ADS_CLIENT_ID` | `LINKEDIN_ADS_CLIENTID` |
+  | `LINKEDIN_ADS_CLIENT_SECRET` | `LINKEDIN_ADS_CLIENTSECRET` |
+  | `LINKEDIN_ADS_ACCESS_TOKEN` | `LINKEDIN_ADS_ACCESSTOKEN` |
+  | `LINKEDIN_ADS_REFRESH_TOKEN` | `LINKEDIN_ADS_REFRESHTOKEN` |
+
 ## [0.2.0] — 2026-11-08
 
 ### Added
