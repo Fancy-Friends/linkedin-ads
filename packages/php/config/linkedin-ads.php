@@ -20,12 +20,12 @@ return [
 
     'credentials' => [
         // OAuth client ID (one per installation).
-        'clientId' => env('LINKEDIN_ADS_CLIENTID'),
+        'clientId' => env('LINKEDIN_ADS_CLIENT_ID', env('LINKEDIN_ADS_CLIENTID')),
         // OAuth client secret (one per installation, secret).
-        'clientSecret' => env('LINKEDIN_ADS_CLIENTSECRET'),
+        'clientSecret' => env('LINKEDIN_ADS_CLIENT_SECRET', env('LINKEDIN_ADS_CLIENTSECRET')),
         // Member access token (per connected account, secret).
-        'accessToken' => env('LINKEDIN_ADS_ACCESSTOKEN'),
+        'accessToken' => env('LINKEDIN_ADS_ACCESS_TOKEN', env('LINKEDIN_ADS_ACCESSTOKEN')),
         // Programmatic refresh token (per connected account, secret).
-        'refreshToken' => env('LINKEDIN_ADS_REFRESHTOKEN'),
+        'refreshToken' => env('LINKEDIN_ADS_REFRESH_TOKEN', env('LINKEDIN_ADS_REFRESHTOKEN')),
     ],
 ];
